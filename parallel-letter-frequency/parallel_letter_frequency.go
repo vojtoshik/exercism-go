@@ -3,6 +3,8 @@ package letter
 // FreqMap records the frequency of each rune in a given text.
 type FreqMap map[rune]int
 
+// ConcurrentFrequency calculates the frequency of runes concurrently for
+// each text passed as parameter
 func ConcurrentFrequency(texts []string) FreqMap {
 	c := make(chan FreqMap)
 	for _, text := range texts {
