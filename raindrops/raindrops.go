@@ -8,11 +8,11 @@ var factors = map[int]string{
 	7: "Plong",
 }
 
-func Convert(n int) string  {
+func Convert(n int) string {
 	result := ""
 
-	for factor,sound := range factors {
-		if n % factor == 0 {
+	for factor, sound := range factors {
+		if n%factor == 0 {
 			result += sound
 		}
 	}

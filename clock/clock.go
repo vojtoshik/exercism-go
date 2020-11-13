@@ -11,7 +11,7 @@ type Clock struct {
 
 func New(h int, m int) Clock {
 	return Clock{
-		minutes: normalizeMinutes(h * minutesInOneHour + m),
+		minutes: normalizeMinutes(h*minutesInOneHour + m),
 	}
 }
 
@@ -32,10 +32,10 @@ func (c Clock) String() string {
 		minutes += minutesInOneDay
 	}
 
-	return fmt.Sprintf("%02d:%02d", minutes / minutesInOneHour % 24, minutes % minutesInOneHour)
+	return fmt.Sprintf("%02d:%02d", minutes/minutesInOneHour%24, minutes%minutesInOneHour)
 }
 
-func normalizeMinutes(minutes int) int  {
+func normalizeMinutes(minutes int) int {
 	minutes = minutes % minutesInOneDay
 
 	if minutes < 0 {

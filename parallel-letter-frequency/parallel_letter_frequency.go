@@ -5,7 +5,7 @@ type FreqMap map[rune]int
 
 func ConcurrentFrequency(texts []string) FreqMap {
 	c := make(chan FreqMap)
-	for _,text := range texts {
+	for _, text := range texts {
 		go goroutineFrequency(text, c)
 	}
 
@@ -13,9 +13,9 @@ func ConcurrentFrequency(texts []string) FreqMap {
 
 	for i := 0; i < len(texts); i++ {
 
-		var freqMap = <- c
+		var freqMap = <-c
 
-		for k,v := range freqMap {
+		for k, v := range freqMap {
 			subtotals[k] += v
 		}
 	}
@@ -23,7 +23,7 @@ func ConcurrentFrequency(texts []string) FreqMap {
 	return subtotals
 }
 
-func goroutineFrequency(s string, c chan <- FreqMap) {
+func goroutineFrequency(s string, c chan<- FreqMap) {
 	c <- Frequency(s)
 }
 

@@ -6,7 +6,7 @@ import (
 
 var scores = []struct {
 	letters string
-	score int
+	score   int
 }{
 	{"AEIOULNRST", 1},
 	{"DG", 2},
@@ -22,7 +22,7 @@ func Score(s string) int {
 	scoreMap := createScoreMap()
 	var result = 0
 
-	for _,letter := range strings.ToUpper(s) {
+	for _, letter := range strings.ToUpper(s) {
 		result += scoreMap[letter]
 	}
 
@@ -33,7 +33,7 @@ func createScoreMap() map[int32]int {
 	letterToScore := make(map[int32]int)
 
 	for _, score := range scores {
-		for _,letter := range score.letters {
+		for _, letter := range score.letters {
 
 			letterToScore[letter] = score.score
 		}

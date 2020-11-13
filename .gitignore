@@ -1,0 +1,5 @@
+.idea
+.exercism
+*_test.go
+/main.go
+/main

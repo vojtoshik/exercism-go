@@ -19,6 +19,6 @@ func AddGigasecond(t time.Time) time.Time {
 	// Then remove all the stock comments.
 	// They're here to help you get started but they only clutter a finished solution.
 	// If you leave them in, reviewers may protest!
-	duration,_ := time.ParseDuration(strconv.Itoa(gigaSecond) + "s")
+	duration, _ := time.ParseDuration(strconv.Itoa(gigaSecond) + "s")
 	return t.Add(duration)
 }

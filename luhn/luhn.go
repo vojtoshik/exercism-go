@@ -18,11 +18,11 @@ func Valid(ccNumber string) bool {
 
 	sum := 0
 
-	for i:=1; i <= len(ccNumber); i++ {
+	for i := 1; i <= len(ccNumber); i++ {
 
-		digit := int(ccNumber[len(ccNumber) - i]) - AsciiCodeZero
+		digit := int(ccNumber[len(ccNumber)-i]) - AsciiCodeZero
 
-		if i % 2 == 1 {
+		if i%2 == 1 {
 			sum += digit
 			continue
 		}
@@ -36,5 +36,5 @@ func Valid(ccNumber string) bool {
 		sum += v
 	}
 
-	return sum % 10 == 0
+	return sum%10 == 0
 }

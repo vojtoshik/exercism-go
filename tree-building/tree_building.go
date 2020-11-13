@@ -6,12 +6,12 @@ import (
 )
 
 type Record struct {
-	ID int
+	ID     int
 	Parent int
 }
 
 type Node struct {
-	ID int
+	ID       int
 	Children []*Node
 }
 
