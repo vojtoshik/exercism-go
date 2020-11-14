@@ -1,19 +1,23 @@
 package letter
 
+import "math"
+
 // FreqMap records the frequency of each rune in a given text.
 type FreqMap map[rune]int
 
 // ConcurrentFrequency calculates the frequency of runes concurrently for
 // each text passed as parameter
 func ConcurrentFrequency(texts []string) FreqMap {
-	c := make(chan FreqMap)
+	c := make(chan FreqMap, calculateChannelSize(len(texts)))
 	for _, text := range texts {
-		go goroutineFrequency(text, c)
+		go func(s string) {
+			c <- Frequency(s)
+		}(text)
 	}
 
 	subtotals := make(FreqMap)
 
-	for i := 0; i < len(texts); i++ {
+	for range texts {
 
 		var freqMap = <-c
 
@@ -25,8 +29,9 @@ func ConcurrentFrequency(texts []string) FreqMap {
 	return subtotals
 }
 
-func goroutineFrequency(s string, c chan<- FreqMap) {
-	c <- Frequency(s)
+func calculateChannelSize(tasksNumber int) int {
+	tn := float64(tasksNumber)
+	return int(math.Sqrt(tn) + tn/3 + 1)
 }
 
 // Frequency counts the frequency of each rune in a given text and returns this
