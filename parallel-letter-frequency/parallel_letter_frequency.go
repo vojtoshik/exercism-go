@@ -1,14 +1,14 @@
 package letter
 
-import "math"
-
 // FreqMap records the frequency of each rune in a given text.
 type FreqMap map[rune]int
+
+const defaultChannelSize = 10
 
 // ConcurrentFrequency calculates the frequency of runes concurrently for
 // each text passed as parameter
 func ConcurrentFrequency(texts []string) FreqMap {
-	c := make(chan FreqMap, calculateChannelSize(len(texts)))
+	c := make(chan FreqMap, defaultChannelSize)
 	for _, text := range texts {
 		go func(s string) {
 			c <- Frequency(s)
@@ -27,11 +27,6 @@ func ConcurrentFrequency(texts []string) FreqMap {
 	}
 
 	return subtotals
-}
-
-func calculateChannelSize(tasksNumber int) int {
-	tn := float64(tasksNumber)
-	return int(math.Sqrt(tn) + tn/3 + 1)
 }
 
 // Frequency counts the frequency of each rune in a given text and returns this
