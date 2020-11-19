@@ -7,20 +7,24 @@ package triangle
 
 import "math"
 
-// Notice KindFromSides() returns this type. Pick a suitable data type.
+// Kind is a type representing a kind of triangle
 type Kind int
 
 const (
-    NaT = iota
-    Equ
-    Iso
-    Sca
+	// NaT stands for Not a Triangle
+	NaT Kind = iota
+	// Equ stands for equilateral
+	Equ
+	// Iso stands for isosceles
+	Iso
+	// Sca stands for scalene
+	Sca
 )
 
 // KindFromSides returns type of triangle that sides of length a, b and c compose
 func KindFromSides(a, b, c float64) Kind {
 
-	if !isValidValue(a) || !isValidValue(b) || !isValidValue(c) || a + b < c || b + c < a || c + a < b {
+	if !isValidValue(a) || !isValidValue(b) || !isValidValue(c) || a+b < c || b+c < a || c+a < b {
 		return NaT
 	}
 
