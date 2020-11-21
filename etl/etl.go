@@ -2,7 +2,8 @@ package etl
 
 import "strings"
 
-func Transform (input map[int][]string) (r map[string]int) {
+// Transform does, what it supposed to do, according to task in README.md
+func Transform(input map[int][]string) (r map[string]int) {
 
 	r = make(map[string]int)
 
