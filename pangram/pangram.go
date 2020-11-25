@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+const lettersInLatinAlphabet = 26
+
 // IsPangram returns true if the input is a pangram
 func IsPangram(in string) bool {
 	in = strings.ToLower(in)
@@ -16,20 +18,14 @@ func IsPangram(in string) bool {
 	}
 
 	h := make(map[int]bool)
+	uniqueLetters := 0
 
 	for _, r := range in {
-		h[int(r)] = true
-	}
-
-	if len(h) != 26 {
-		return false
-	}
-
-	for _, v := range h {
-		if !v {
-			return false
+		if _,ok := h[int(r)]; !ok {
+			h[int(r)] = true
+			uniqueLetters++
 		}
 	}
 
-	return true
+	return uniqueLetters == lettersInLatinAlphabet
 }
