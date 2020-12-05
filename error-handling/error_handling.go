@@ -1,15 +1,11 @@
 package erratum
 
-func Use(f func() (Resource,error), s string) (err error) {
+// Use opens uses resource returned by f() handling all the errors
+// as requested
+func Use(f func() (Resource, error), s string) (err error) {
 	var r Resource
 
-	for {
-		r, err = f()
-
-		if err == nil {
-			break
-		}
-
+	for r, err = f(); err != nil; r, err = f() {
 		if _, ok := err.(TransientError); ok {
 			continue
 		}
@@ -18,7 +14,6 @@ func Use(f func() (Resource,error), s string) (err error) {
 	}
 
 	defer r.Close()
-
 
 	defer func(res Resource) {
 		if r := recover(); r != nil {
